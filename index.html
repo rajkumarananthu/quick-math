@@ -6,7 +6,12 @@
 <body>
 
 
-<div id=container></div>
+<div id="container"><p>{{matter}}</p>
+
+<p>{{tokens[0].lo}}</p>
+<p>{{tokens[0].ro}}</p>
+<p>{{tokens[0].op}}</p>
+</div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
 
@@ -23,13 +28,63 @@ new Vue({
 
   // Here we can register any values or collections that hold data
   // for the application
-  data: {},
+  data: {
+     //score : 0;
+     matter : "hello",
+     tokens:[]
+     
+  },
 
   // Anything within the ready function will run when the application loads
-  ready: function() {},
+  ready: function() {
+    this.randomNumbers();
+  },
 
   // Methods we want to use in our application are registered here
-  methods: {}
+
+  methods: {
+
+
+
+
+    randomNumbers: function(){
+
+      a = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+      b = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+      
+      return this.randomOperation(a,b);
+
+    },
+
+    randomOperation: function(a, b){
+      randInt = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+      switch(randInt){
+         case 1:
+          result = a + b;
+         case 2:
+          result = a - b;
+         case 3:
+          result = a * b;
+         case 4:
+          result = a % b;
+
+      }
+
+      var tokens = [{'ro':a,'lo':b,'result':result,'op':randInt}];
+      this.$set('tokens',tokens)
+    },
+
+    checkCalculation: function(){
+      return "hello";
+    },
+
+    updateScore:function(){
+      return "world";
+    },
+
+  }
+
+
 });
 
 </script>  
