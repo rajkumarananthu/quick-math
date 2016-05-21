@@ -88,9 +88,10 @@ new Vue({
     },
 
     checkCalculation: function(){
-      
+                                  // 'this' is important below
       if(this.tokens[0].result == this.answer){
         alert("Hurray");
+        this.updateScore();
       }
       else{
         alert("Oops");
@@ -98,7 +99,7 @@ new Vue({
     },
 
     updateScore:function(){
-      return "world";
+      this.score += 1;
     },
 
   }
