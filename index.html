@@ -6,23 +6,19 @@
 <body>
 
 
-<div id="container"><p>{{matter}}</p>
+<div id="container"><p>Hello {{name}}</p>
 
 <p>{{tokens[0].lo}}</p>
 <p>{{tokens[0].op}}</p>
 <p>{{tokens[0].ro}}</p>
 <p>{{tokens[0].result}}</p>
 
-<input v-model="answer" type="text" name="answer">
-<button v-on:click="checkCalculation">Check</button>
+<input v-on:keyup.enter|keyup.space="checkCalculation" v-model="answer" type="text" name="answer">
 <p>Score</p>
 <p>{{ score }}</p>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
-
-
-
 <script type="text/javascript">
 
 // app.js
@@ -35,8 +31,8 @@ new Vue({
   // Here we can register any values or collections that hold data
   // for the application
   data: {
+     name : "",
      score : 0,
-     matter : "hello",
      tokens:[]
 
      
@@ -44,6 +40,8 @@ new Vue({
 
   // Anything within the ready function will run when the application loads
   ready: function() {
+    var name = prompt("Please Enter you Name");
+    this.name = name;
     this.randomNumbers();
   },
 
