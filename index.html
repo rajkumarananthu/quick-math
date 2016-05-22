@@ -2,20 +2,31 @@
 <html>
 <head>
     <title></title>
+    <style type="text/css">
+      h1{
+        display: inline-block;
+        font-size: 24px;
+
+      }  
+
+    </style>
 </head>
 <body>
 
 
-<div id="container"><p>Hello {{name}}</p>
+<div id="container">
+<center>
+<h1>Hello {{name}}</h1><br>
 
-<p>{{tokens[0].lo}}</p>
-<p>{{tokens[0].op}}</p>
-<p>{{tokens[0].ro}}</p>
-<p>{{tokens[0].result}}</p>
+<h1>{{tokens[0].lo}}</h1>
+<h1>{{tokens[0].op}}</h1>
+<h1>{{tokens[0].ro}}</h1><br>
+<!-- <p>{{tokens[0].result}}</p>-->
 
-<input v-on:keyup.enter|keyup.space="checkCalculation" v-model="answer" type="text" name="answer">
-<p>Score</p>
-<p>{{ score }}</p>
+<input v-on:keyup.enter="checkCalculation" v-model="answer" type="text" name="answer"><br>
+<h1>Score</h1><br>
+<h1>{{ score }}</h1>
+</center>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
@@ -79,6 +90,10 @@ new Vue({
           op = '%';
           break;
 
+         //case 5:
+         // result = Math.pow(a,b);
+         // op = ^;
+
       }
 
       var tokens = [{'lo':a,'ro':b,'result':result,'op':op}];
@@ -86,21 +101,37 @@ new Vue({
     },
 
     checkCalculation: function(){
-                                  // 'this' is important below
+
       if(this.tokens[0].result == this.answer){
-        alert("Hurray");
+        //alert("Hurray");
         this.answer = "";
-        this.updateScore();
+        this.updateScore('+');
+
+      }
+      else if (this.answer==null) {
+
+          this.updateScore('*');
 
       }
       else{
-        alert("Oops");
+        this.answer=="";
+        this.updateScore('-');
       }
+      
     },
 
-    updateScore:function(){
-      this.score += 1;
-      this.randomNumbers();
+    updateScore:function(q){
+      if (q=='+') {
+        this.score += 1;
+        this.randomNumbers();
+      }
+      else if(q=='-'){
+        this.score -= 1;
+        this.randomNumbers();
+      }
+      else{
+        this.randomNumbers();
+      }
     },
 
   }
