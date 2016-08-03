@@ -44,6 +44,7 @@ new Vue({
   // for the application
   data: {
      name : "",
+     answer:"",
      score : 0,
      tokens:{}
 
@@ -105,18 +106,18 @@ new Vue({
 
       if(this.tokens.result == this.answer){
         //alert("Hurray");
-        this.answer = "";
+        this.$set('answer', "")
         this.updateScore('+');
 
       }
       else if (this.answer==null) {
-
+          this.$set('answer', "")
           this.updateScore('*');
 
       }
       else{
-        this.answer=="";
-        this.updateScore('-');
+         this.$set('answer', "")
+         this.updateScore('-');
       }
       
     },
